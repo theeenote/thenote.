@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заметка</title>
+    <link rel="shortcut icon" href="C:\Users\Админ\Downloads\w512h5121350249286notes.png" type="image/x-icon">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="input-task">
+                <input id="text" type="text" placeholder="Какие у вас планы?">
+                <button type="button" class="button-task" onclick="addtext()">Добавить</button>
+            </div>
+        </form>
+        <div class="tasks" id="tasks"></div>
+        <button onclick="deleteTasks()" id="tt">Delete</button>
+        <button onclick="delallTasks()" id="t">Delete all</button>
+    </div>
+    <script>
+        function addtext() {
+            let text = document.getElementById('text').value.trim();
+            let id = localStorage.length + 1;
+
+            if (text === '') {
+                alert('Поле не должно быть пустым');
+                return;
+            }
+
+            localStorage.setItem(id, text);
+
+            let task = document.createElement('div');
+            let task_text = document.createElement('div');
+            let task_id = document.createElement('div');
+
+            task_text.className = 'task-text';
+            task_text.innerHTML = text;
+
+            task_id.className = 'task-id';
+            task_id.innerHTML = id;
+
+            task.className = 'task';
+            task.appendChild(task_text);
+            task.appendChild(task_id);
+
+            document.getElementById('tasks').appendChild(task);
+            document.getElementById('text').value = '';
+        }
+
+        function showTasks() {
+            document.getElementById('tasks').innerHTML = '';
+            for (let i = 1; i <= localStorage.length; i++) {
+                let text = localStorage.getItem(i);
+
+                let task = document.createElement('div');
+                let task_text = document.createElement('div');
+                let task_id = document.createElement('div');
+
+                task_text.className = 'task-text';
+                task_text.innerHTML = text;
+
+                task_id.className = 'task-id';
+                task_id.innerHTML = i;
+
+                task.className = 'task';
+                task.appendChild(task_text);
+                task.appendChild(task_id);
+
+                document.getElementById('tasks').appendChild(task);
+            }
+        }
+
+        showTasks();
+
+        function deleteTasks() {
+            let id = localStorage.length;
+            localStorage.removeItem(id);
+            showTasks();
+        }
+
+        function delallTasks() {
+            localStorage.clear();
+            showTasks();
+        }
+
+        // Обработчик события для нажатия клавиш в поле ввода
+        document.getElementById('text').addEventListener('keydown', function(event) {
+            if (event.code === 'Enter') {
+                event.preventDefault(); // предотвращает стандартное поведение
+                addtext(); // вызываем функцию добавления задачи
+            }
+        });
+    </script>
+</body>
+</html>
