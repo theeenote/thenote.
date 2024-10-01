@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The note</title href="https://lostxpanda.com/cdn/shop/products/9.png?v=1680884450&width=1445">
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" href="https://www.pngmart.com/files/23/Note-Icon-PNG-Free-Download.png" type="image/x-icon">
+    <link rel="shortcut icon" href="https://www.pngmart.com/files/23/Note-Icon-PNG-Free-Download.png"
+        type="image/x-icon">
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <div class="input-task">
+                <input id="text" type="text" placeholder="Какие у вас планы?">
+                <button type="button" class="button-task" onclick="addText()">Добавить</button>
+            </div>
+        </form>
+        <div class="tasks" id="tasks"></div>
+        <button onclick="delallTasks()" id="t">Удалить все</button>
+    </div>
+    <script>
+        function addText() {
+            let text = document.getElementById('text').value.trim();
+            let id = Date.now(); // Используем временную метку для уникальности
+
+            if (text === '') {
+                alert('Поле не должно быть пустым');
+                return;
+            }
+
+            localStorage.setItem(id, text); // Сохраняем заметку с уникальным ID
+            displayTask(id, text); // Отображаем заметку
+            document.getElementById('text').value = ''; // Очищаем поле ввода
+        }
+
+        function displayTask(id, text) {
+            let task = document.createElement('div');
+            task.className = 'task';
+
+            let taskText = document.createElement('div');
+            taskText.className = 'task-text';
+            taskText.innerHTML = text;
+
+            let deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.innerHTML = 'Del';
+            deleteButton.style.backgroundColor = '#303030';
+            deleteButton.style.color = 'white';
+            deleteButton.style.border = 'none';
+            deleteButton.style.padding = '10px 15px';
+            deleteButton.style.borderRadius = '13px';
+            deleteButton.style.fontSize = '10px'
+            deleteButton.onclick = function () {
+                deleteTask(id); // Удаление по уникальному ID
+            };
+
+            task.appendChild(taskText);
+            task.appendChild(deleteButton);
+            document.getElementById('tasks').appendChild(task);
+        }
+
+        function showTasks() {
+            document.getElementById('tasks').innerHTML = '';
+            let keys = Object.keys(localStorage);
+            keys.forEach(key => {
+                let text = localStorage.getItem(key);
+                displayTask(key, text); // Отображаем каждую заметку
+            });
+        }
+
+        function deleteTask(id) {
+            localStorage.removeItem(id); // Удаляем заметку по ID
+            showTasks(); // Обновляем отображение
+        }
+
+        function delAllTasks() {
+            localStorage.clear(); // Очищаем все заметки
+            showTasks(); // Обновляем отображение
+        }
+
+        document.getElementById('text').addEventListener('keydown', function (event) {
+            if (event.code === 'Enter') {
+                event.preventDefault();
+                addText();
+            }
+        });
+
+        showTasks(); // Отображаем заметки при загрузке страницы
+    </script>
+</body>
+
+</html>

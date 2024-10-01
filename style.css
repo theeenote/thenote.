@@ -1,6 +1,7 @@
-body{
+body {
     background-color: black;
 }
+
 .container {
     background-color: #ffffff;
     width: 600px;
@@ -27,7 +28,7 @@ body{
     margin-left: 15px;
 }
 
-.button-task{
+.button-task {
     background-color: rgb(0, 0, 0);
     padding: 5px 10px;
     color: white;
@@ -39,12 +40,13 @@ body{
     font-size: 18px;
 }
 
-.button-task:hover{
+.button-task:hover {
     background-color: rgb(255, 255, 255);
     box-shadow: 2px 2px 4px rgb(0, 0, 0);
     color: black;
 }
-.task{
+
+.task {
     background-color: #5D5656;
     width: 80%;
     display: flex;
@@ -58,43 +60,27 @@ body{
     gap: 150px;
     transition: 0.5s;
 }
-.task:hover{
+
+.task:hover {
     background-color: #2d2a2a;
     color: white;
 }
 
-#t{
+#t {
     background-color: rgb(0, 0, 0);
     color: white;
-    border: 1px solid rgb(41, 40, 40) ; 
-    padding: 5px 10px;   
+    border: 1px solid rgb(41, 40, 40);
+    padding: 5px 10px;
     outline: none;
     border-radius: 10px;
     box-shadow: 4px 4px 4px rgb(38, 28, 28);
     transition: 0.5s;
     font-size: 18px;
     margin: 0 auto;
-display: inline-block;
-}
-#t:hover{
-    background-color: #ffffff;
-    color: black;
+    display: inline-block;
 }
 
-#tt{
-    background-color: rgb(0, 0, 0);
-    color: white;
-    border: 1px solid rgb(41, 40, 40) ; 
-    padding: 5px 10px;   
-    outline: none;
-    border-radius: 10px;
-    box-shadow: 4px 4px 4px rgb(38, 28, 28);
-    transition: 0.5s;
-    font-size: 18px;
-    margin: 5px auto;
-display: inline-block;
-}
-#tt:hover{
+#t:hover {
     background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    color: black;
 }
